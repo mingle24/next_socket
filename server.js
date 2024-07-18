@@ -16,6 +16,12 @@ app.prepare().then(() => {
 
   io.on("connection", (socket) => {
     console.log("a user connected");
+
+    socket.on("message", (message) => {
+      console.log("message: " + message);
+      io.emit("message", message); // Broadcast the message to all clients
+    });
+
     socket.on("disconnect", () => {
       console.log("user disconnected");
     });
